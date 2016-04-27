@@ -16,5 +16,6 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         //修改
         //再修改
+
     }
 }
