@@ -21,10 +21,13 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
 <<<<<<< HEAD
         //修改
+<<<<<<< HEAD
         //再修改
 
 =======
         //65465132
 >>>>>>> master
+=======
+>>>>>>> parent of 0dd6b4c... 1
     }
 }
