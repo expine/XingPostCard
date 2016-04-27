@@ -3,10 +3,7 @@ package com.ashez.garfield.xingpostcard.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-<<<<<<< HEAD
-import android.widget.Toast;
-=======
->>>>>>> master
+
 
 import com.ashez.garfield.xingpostcard.R;
 

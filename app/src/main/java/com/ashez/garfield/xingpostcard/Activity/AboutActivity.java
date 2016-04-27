@@ -9,25 +9,12 @@ import com.ashez.garfield.xingpostcard.R;
 /**
  * Created by Garfield on 4/26/16.
  */
-<<<<<<< HEAD
-=======
 
-//0000000
->>>>>>> master
 public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-<<<<<<< HEAD
-        //修改
-<<<<<<< HEAD
-        //再修改
 
-=======
-        //65465132
->>>>>>> master
-=======
->>>>>>> parent of 0dd6b4c... 1
     }
 }
