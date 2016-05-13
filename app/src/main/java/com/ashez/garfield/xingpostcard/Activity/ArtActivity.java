@@ -97,6 +97,7 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
 
                         Intent intent = new Intent(ArtActivity.this, ResultActivity.class);
                         intent.putExtra("bitmap", bitmapByte);
+                        intent.putExtra("mwords", mwords.getText().toString());
                         startActivity(intent);
 
                 }
