@@ -9,10 +9,6 @@ import android.test.ApplicationTestCase;
 public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
-<<<<<<< HEAD
-=======
 
-        //132
->>>>>>> master
     }
 }
