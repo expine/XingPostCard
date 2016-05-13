@@ -1,18 +1,98 @@
 package com.ashez.garfield.xingpostcard.Activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
+import android.widget.Button;
 
 import com.ashez.garfield.xingpostcard.R;
+import com.ashez.xingpostcard.adapter.Pick_SimpleAdapter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Garfield on 4/26/16.
  */
 public class PicPickActivity extends AppCompatActivity {
+
+    private RecyclerView mRecyclerView;
+    public Pick_SimpleAdapter mAdapter;
+    Context con;
+    Button one,two;
+    public ArrayList<Integer> mData;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picpick);
+
+        initData();
+        initViews();
+        view_layout(); //布局设置
+        change_Click();//换比例
+        item_Click();
+
+
+
+    }
+
+    private void item_Click() {
+        mAdapter.setOnItemClickListener(new Pick_SimpleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+//                Toast.makeText(MainActivity.this,"2222sad"+position,Toast.LENGTH_SHORT).show();
+                System.out.println("ssssssssssssssssss");
+
+
+                int pick=position;
+                Intent intent = new Intent(PicPickActivity.this, CollectionActivity.class);
+                //  第一个参数是key， 第二个参数是要传递的值
+                intent.putExtra("Pick_position",
+                        pick);
+                PicPickActivity.this.startActivity(intent);
+            }
+        });
+    }
+
+    private void  change_Click() {
+        final StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,
+                StaggeredGridLayoutManager.HORIZONTAL);
+//        one.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                mRecyclerView.setLayoutManager(staggeredGridLayoutManager);
+//            }
+//        });
+
+    }
+
+    private void view_layout() {
+        final StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,
+                StaggeredGridLayoutManager.HORIZONTAL);
+        mAdapter=new Pick_SimpleAdapter(this,mData);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mRecyclerView.setLayoutManager(staggeredGridLayoutManager);
+        //如果确定每个item的内容不会改变RecyclerView的大小，设置这个选项可以提高性能
+        mRecyclerView.setHasFixedSize(true);
+    }
+
+    private void initData() {
+        mData = new ArrayList<Integer>(Arrays.asList(R.mipmap.ic_launcher,
+                R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher, R.mipmap.ic_launcher,
+                R.mipmap.ic_launcher));
+
+    }
+
+    private void initViews() {
+        mRecyclerView= (RecyclerView) findViewById(R.id.recyclerView);
+//        one= (Button) findViewById(R.id.one);
+//        two= (Button) findViewById(R.id.two);
     }
 }

@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.AboutActivity"/>
+        <activity android:name=".Activity.AboutActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name=".Activity.ArtActivity"/>
         <activity android:name=".Activity.CollectionActivity"/>
         <activity android:name=".Activity.PicPickActivity"/>
