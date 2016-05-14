@@ -81,7 +81,32 @@ public class ClipImageView extends ImageView implements
         mPaint.setColor(Color.WHITE);
         mMaskColor = Color.parseColor("#55000000");
         mTipText = "裁剪成功！";
-        mClipPadding = 0;
+        mClipPadding = 1;
+
+        setScaleType(ScaleType.MATRIX);
+        mGestureDetector = new GestureDetector(context,
+                new GestureDetector.SimpleOnGestureListener() {
+                    @Override
+                    public boolean onDoubleTap(MotionEvent e) {
+                        if (isAutoScale)
+                            return true;
+
+                        float x = e.getX();
+                        float y = e.getY();
+                        if (getScale() < mScaleMin) {
+                            ClipImageView.this.postDelayed(new AutoScaleRunnable(mScaleMin, x, y), 16);
+                        } else {
+                            ClipImageView.this.postDelayed(new AutoScaleRunnable(mInitScale, x, y), 16);
+                        }
+                        isAutoScale = true;
+
+                        return true;
+                    }
+                });
+        mScaleGestureDetector = new ScaleGestureDetector(context, this);
+        this.setOnTouchListener(this);
+
+        mPaint.setDither(true);
     }
 
 
