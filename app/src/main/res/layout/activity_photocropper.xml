@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.githang.clipimage.ClipImageView
+        android:id="@+id/clip_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom"
+        app:civHeight="2"
+        app:civMaskColor="#55000000"
+        app:civWidth="3"/>
+
+    <TextView
+        android:layout_gravity="bottom|right"
+        android:layout_width="wrap_content"
+        android:padding="25dp"
+        android:layout_height="wrap_content"
+        android:text="  确认  "/>
+
+    <TextView
+        android:layout_gravity="bottom|left"
+        android:layout_width="wrap_content"
+        android:padding="25dp"
+        android:layout_height="wrap_content"
+        android:text="  取消  "/>
+
+
+
+</FrameLayout>

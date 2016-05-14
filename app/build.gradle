@@ -27,6 +27,7 @@ dependencies {
     compile 'com.zzhoujay.materialcolors:materialcolors:1.0.0'
     compile 'com.android.support:design:23.3.0'
 //    compile 'com.nineoldandroids:library:2.4.0'
-
+    
+    compile 'com.githang:clipimageview:0.1'
     compile 'com.orhanobut:dialogplus:1.11@aar'
 }
