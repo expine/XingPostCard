@@ -2,6 +2,7 @@ package com.ashez.garfield.xingpostcard.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -34,43 +35,51 @@ public class PicPickActivity extends AppCompatActivity {
         initData();
         initViews();
         view_layout(); //布局设置
-        change_Click();//换比例
+//        change_Click();//换比例
         item_Click();
 
 
 
     }
-
+        Uri uri=null;
+//    ImageView img;
     private void item_Click() {
         mAdapter.setOnItemClickListener(new Pick_SimpleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 //                Toast.makeText(MainActivity.this,"2222sad"+position,Toast.LENGTH_SHORT).show();
-                System.out.println("ssssssssssssssssss");
+//                    img.setImageResource(mData.get(position));
+//                Uri uri =  Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +"://"
+//                        + r.getResourcePackageName(mData.get(position)) + "/"
+//                        + r.getResourceTypeName(mData.get(position) + "/"
+//                        + r.getResourceEntryName(mData.get(position));
+//                Uri uri = Uri.parse("res:///" + mData.get(position));
 
 
-                int pick=position;
+                System.out.println("ttttttttt"+mData.get(position));
+
+//                int pick=position;
                 Intent intent = new Intent(PicPickActivity.this, CollectionActivity.class);
                 //  第一个参数是key， 第二个参数是要传递的值
-                intent.putExtra("Pick_position",
-                        pick);
+                intent.putExtra("styleCode",
+                        mData.get(position));
                 PicPickActivity.this.startActivity(intent);
             }
         });
     }
 
-    private void  change_Click() {
-        final StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,
-                StaggeredGridLayoutManager.HORIZONTAL);
-//        one.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
+//    private void  change_Click() {
+//        final StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,
+//                StaggeredGridLayoutManager.HORIZONTAL);
+////        one.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////
+////                mRecyclerView.setLayoutManager(staggeredGridLayoutManager);
+////            }
+////        });
 //
-//                mRecyclerView.setLayoutManager(staggeredGridLayoutManager);
-//            }
-//        });
-
-    }
+//    }
 
     private void view_layout() {
         final StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,
