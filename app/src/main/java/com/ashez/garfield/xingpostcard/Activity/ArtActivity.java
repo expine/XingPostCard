@@ -68,9 +68,6 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
         iniMenu();//初始化底部
 
 
-
-
-
     }
 
     private void initHandler() {
@@ -90,7 +87,9 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
                          * 编辑完后，从编辑界面跳转到结果界面
                          * */
                         // 此处获取剪裁后的bitmap
-                        Bitmap bitmap = imageView.clip();
+                        imageView.setDrawingCacheEnabled(true);
+                        Bitmap bitmap = imageView.getDrawingCache();
+
 
                         // 由于Intent传递bitmap不能超过40k,此处使用二进制数组传递
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -101,6 +100,7 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
                         intent.putExtra("bitmap", bitmapByte);
                         intent.putExtra("mwords", mwords.getText().toString());
                         startActivity(intent);
+                        imageView.setDrawingCacheEnabled(false);
 
                 }
             }
@@ -114,7 +114,6 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
         artMenuAdapter = new ArtMenuAdapter(this, mHandler);
         artMenu.setAdapter(artMenuAdapter);
     }
-
 
 
     private void initTextViewAndEditView() {
@@ -137,8 +136,8 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
             @Override
             public void onGlobalLayout() {
                 artPicsarea.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                layoutParams.width = (artPicsarea.getHeight() * 9 / 16)-200;
-                System.out.println("成功进入---"+layoutParams.width);
+                layoutParams.width = (artPicsarea.getHeight() * 9 / 16 );
+                System.out.println("成功进入---" + layoutParams.width);
 
             }
         });
