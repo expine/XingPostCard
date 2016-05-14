@@ -41,8 +41,8 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
     Handler mHandler;
     ViewGroup.LayoutParams layoutParams;
 
-    @Bind(R.id.pic_edit_view)
-    MyImageView imageView;
+    //    @Bind(R.id.pic_edit_view)
+//    MyImageView imageView;
     @Bind(R.id.words_1)
     TextView mwords;
 
@@ -51,6 +51,9 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
     @Bind(R.id.art_picsarea)
     LinearLayout artPicsarea;
 
+    MyImageView imageView;
+
+    int height, width;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -136,7 +139,7 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
             @Override
             public void onGlobalLayout() {
                 artPicsarea.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                layoutParams.width = (artPicsarea.getHeight() * 9 / 16 );
+                layoutParams.width = (artPicsarea.getHeight() * 9 / 20);
                 System.out.println("成功进入---" + layoutParams.width);
 
             }
@@ -145,6 +148,38 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
         artPicsarea.setLayoutParams(layoutParams);
 
 
+        imageView = (MyImageView) findViewById(R.id.pic_edit_view);
+        ViewTreeObserver vto2 = imageView.getViewTreeObserver();
+        vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                imageView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+
+//                ViewGroup.LayoutParams lp = imageView.getLayoutParams();
+//                lp.height = layoutParams.height / 2;
+//                imageView.setLayoutParams(lp);
+                width = imageView.getWidth();
+                height = imageView.getHeight();
+                imageView.setBorderWeight(imageView.getWidth(), imageView.getHeight());
+                Log.e("hhhhhhhh", imageView.getHeight() + "," + imageView.getWidth());
+            }
+        });
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.img)
+                .copy(Bitmap.Config.ARGB_8888, true);
+        imageView.setImageBitmap(bitmap);
+        int w = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
+        int h = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
+        imageView.measure(w, h);
+        int height =imageView.getMeasuredHeight();
+        int width =imageView.getMeasuredWidth();
+//        System.out.println(height+"ssssss"+width);
+        bitmap = Bitmap.createScaledBitmap(bitmap, height, width, true);
+        imageView.setImageBitmap(bitmap);
+
+
+
+//        imageView.clip();
     }
 
 
@@ -165,22 +200,7 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
 
 
     private void initImageView() {
-        ViewTreeObserver vto2 = imageView.getViewTreeObserver();
-        vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                imageView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 
-//                ViewGroup.LayoutParams lp = imageView.getLayoutParams();
-//                lp.height = layoutParams.height / 2;
-//                imageView.setLayoutParams(lp);
-                imageView.setBorderWeight(imageView.getWidth(), imageView.getHeight());
-                Log.e("hhhhhhhh", imageView.getHeight() + "," + imageView.getWidth());
-            }
-        });
-
-        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.img));
-//        imageView.clip();
     }
 
 
