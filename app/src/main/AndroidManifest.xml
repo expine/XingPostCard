@@ -30,10 +30,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         >
         <activity android:name=".Activity.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
 
         </activity>
         <activity android:name=".Activity.AboutActivity" />
@@ -42,14 +39,20 @@
             >
 
         </activity>
-        <activity android:name=".Activity.CollectionActivity" />
+        <activity android:name=".Activity.CollectionActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity android:name=".Activity.PicPickActivity" />
         <activity android:name=".Activity.SettingActivity" />
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.ResultActivity" />
         <activity android:name=".Activity.EditCardActivity"
             android:theme="@style/Theme.AppCompat.Dialog.MinWidth" />
-
+        <activity android:name=".Activity.PhotoCropperActivity"/>
 
     </application>
 

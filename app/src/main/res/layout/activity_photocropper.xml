@@ -2,19 +2,21 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/cropper_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <com.githang.clipimage.ClipImageView
-        android:id="@+id/clip_image_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom"
-        app:civHeight="2"
-        app:civMaskColor="#55000000"
-        app:civWidth="3"/>
+    <!--<com.githang.clipimage.ClipImageView-->
+        <!--android:id="@+id/clip_image_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_above="@+id/bottom"-->
+        <!--app:civHeight="2"-->
+        <!--app:civMaskColor="#55000000"-->
+        <!--app:civWidth="3"/>-->
 
     <TextView
+        android:id="@+id/cropper_bt_confirm"
         android:layout_gravity="bottom|right"
         android:layout_width="wrap_content"
         android:padding="25dp"
@@ -22,6 +24,7 @@
         android:text="  确认  "/>
 
     <TextView
+        android:id="@+id/cropper_bt_cancel"
         android:layout_gravity="bottom|left"
         android:layout_width="wrap_content"
         android:padding="25dp"

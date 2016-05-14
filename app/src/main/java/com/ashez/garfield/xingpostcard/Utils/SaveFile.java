@@ -34,10 +34,12 @@ import android.widget.ViewSwitcher.ViewFactory;
 
 /**
  * Created by hugeterry(http://hugeterry.cn)
- * Date: 16/5/14 15:07
+ * Date: 2016/5/14 15:07
+ * OverWritten by Garfield
+ * Date: 5/15/2016 04:01
  */
 public class SaveFile {
-    public static void toSaveFile(Bitmap bitmap){
+    public static String toSaveFile(Bitmap bitmap){
         File sdCardDir = Environment.getExternalStorageDirectory();
         String strPath = "/StarMark/starmark" + System.currentTimeMillis()
                 + ".jpg";
@@ -52,6 +54,25 @@ public class SaveFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return file.getAbsolutePath();
+    }
+
+    public static String toSaveFile(Bitmap bitmap,String dir){
+        File sdCardDir = Environment.getExternalStorageDirectory();
+        String strPath = "/StarMark/" + dir + System.currentTimeMillis()
+                + ".jpg";
+        File file = new File(sdCardDir, strPath);
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
+        try {
+            FileOutputStream os = new FileOutputStream(file);
+            bitmap.compress(CompressFormat.JPEG, 100, os);
+            os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file.getAbsolutePath();
     }
     public static void scanPhotos(String filePath, Context context) {
         Intent intent = new Intent(

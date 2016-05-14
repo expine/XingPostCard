@@ -9,6 +9,6 @@ public class State {
     public static int myImageViewPhoto = 0;//用于记录照片的R.id
     public static String myImageViewPhotoURL = "";//用于记录照片的URL
 
-    public static boolean hasPhoto = false;//用于记录image中是否有照片
+    public static boolean isneedtocrop = false;//需不需要剪照片
 
 }

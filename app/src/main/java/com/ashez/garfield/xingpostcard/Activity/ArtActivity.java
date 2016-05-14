@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ashez.garfield.xingpostcard.Adapter.ArtMenuAdapter;
+import com.ashez.garfield.xingpostcard.Constants.State;
 import com.ashez.garfield.xingpostcard.R;
 import com.ashez.garfield.xingpostcard.Utils.A;
 
@@ -41,11 +42,13 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
     private ArtMenuAdapter artMenuAdapter;
     private ViewGroup.LayoutParams layoutParams;
     private Handler mHandler;
-    private int styleCode=0;
+    private int styleCode = 0;
+    private int ivHeight = 0;
+    private int ivWidth = 0;
 
-//    @Bind(R.id.pic_edit_view)
+    //    @Bind(R.id.pic_edit_view)
     ImageView imageView;
-//    @Bind(R.id.words_1)
+    //    @Bind(R.id.words_1)
     TextView mwords;
 
     @Bind(R.id.art_menu)
@@ -66,7 +69,7 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
 
         initStyle(styleCode);
 
-
+        //test();
 
 
 
@@ -74,23 +77,51 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
 
         iniMenu();//初始化底部
 
-        test();
+
+
+
+    }
+
+    private void toCropperPictureActivity() {
+        if (State.isneedtocrop) {
+            if (getIntent().getStringExtra("pictureFromLocal")==null) {
+                int pictureID = getIntent().getIntExtra("pictureFromApp", -1);
+                Intent intent = new Intent(ArtActivity.this, PhotoCropperActivity.class);
+                intent.putExtra("styleCode", getIntent().getStringExtra("styleCode"));
+                intent.putExtra("pictureFromApp", pictureID);
+                intent.putExtra("ivHeight", ivHeight);
+                intent.putExtra("ivWidth", ivWidth);
+//                A.goOtherActivityFinish(this, intent);
+
+
+            } else {
+                String uriString = getIntent().getStringExtra("pictureFromLocal");
+                Intent intent = new Intent(ArtActivity.this, PhotoCropperActivity.class);
+                intent.putExtra("styleCode", getIntent().getStringExtra("styleCode"));
+                intent.putExtra("pictureFromLocal", uriString);
+                intent.putExtra("ivHeight", ivHeight);
+                intent.putExtra("ivWidth", ivWidth);
+                A.goOtherActivityFinishNoAnim(this, intent);
+
+            }
+
+        }
 
 
     }
 
     private void test() {
 
-        int w = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
-        int h = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
+        int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         artPicsarea.measure(w, h);
-        int height =artPicsarea.getMeasuredHeight();
-        int width =artPicsarea.getMeasuredWidth();
-        System.out.println("h="+height+"   w="+width);
+        int height = artPicsarea.getMeasuredHeight();
+        int width = artPicsarea.getMeasuredWidth();
+        System.out.println("aaah=" + height + "   w=" + width);
     }
 
     private void initStyle(int styleCode) {
-        switch (styleCode){
+        switch (styleCode) {
             case 0:
 
                 LinearLayout ll = (LinearLayout) findViewById(R.id.art_picsarea);
@@ -105,6 +136,7 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
 
                 initTextViewAndEditView();//对文字框编辑框的初始化，位置微调
                 initImageView();//初始化Imageview
+                System.out.println("h=" + ivHeight + "w=" + ivWidth);
 
                 break;
             case 1:
@@ -119,10 +151,7 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
                 break;
 
 
-
-
         }
-
 
 
     }
@@ -183,7 +212,7 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
         mwords.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                A.goOtherActivityNoAnim(ArtActivity.this,EditCardActivity.class);
+                A.goOtherActivityNoAnim(ArtActivity.this, EditCardActivity.class);
             }
         });
 //        mwords.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/zfyx.ttf"));
@@ -199,7 +228,7 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
             @Override
             public void onGlobalLayout() {
                 artPicsarea.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                layoutParams.width = (artPicsarea.getHeight() *9/16 );
+                layoutParams.width = (artPicsarea.getHeight() * 9 / 16);
 
             }
         });
@@ -207,32 +236,35 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
     }
 
 
-
-
-
     private void initImageView() {
-//        ViewTreeObserver vto2 = imageView.getViewTreeObserver();
-//        vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                imageView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-//
-////                ViewGroup.LayoutParams lp = imageView.getLayoutParams();
-////                lp.height = layoutParams.height / 2;
-////                imageView.setLayoutParams(lp);
-////                ViewGroup.LayoutParams lp = imageView.getLayoutParams();
-////                lp.width = ViewGroup.MarginLayoutParams.MATCH_PARENT;
-////                imageView.setLayoutParams(lp);
-//////                imageView.requestLayout();
-//                Log.e("hhhhhhhh", imageView.getHeight() + "," + imageView.getWidth());
-//            }
-//        });
+        ViewTreeObserver vto2 = imageView.getViewTreeObserver();
+        vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                imageView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                ivHeight = imageView.getHeight();
+                ivWidth = imageView.getWidth();
+                toCropperPictureActivity();
+
+//                ViewGroup.LayoutParams lp = imageView.getLayoutParams();
+//                lp.height = layoutParams.height / 2;
+//                imageView.setLayoutParams(lp);
+//                ViewGroup.LayoutParams lp = imageView.getLayoutParams();
+//                lp.width = ViewGroup.MarginLayoutParams.MATCH_PARENT;
+//                imageView.setLayoutParams(lp);
+////                imageView.requestLayout();
+                Log.e("hhhhhhhh", imageView.getHeight() + "," + imageView.getWidth());
+            }
+        });
 ////
 //        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.img));
+
+        if (getIntent().getStringExtra("path") != null) {
+            imageView.setImageBitmap(BitmapFactory.decodeFile(getIntent().getStringExtra("path")));
+
+
+        }
     }
-
-
-
 
 
     @Override

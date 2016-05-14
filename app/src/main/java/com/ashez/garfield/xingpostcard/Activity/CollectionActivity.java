@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import com.ashez.garfield.xingpostcard.Constants.State;
 import com.ashez.garfield.xingpostcard.R;
 import com.ashez.xingpostcard.adapter.Collection_SimpleAdapter;
 
@@ -32,6 +33,9 @@ public class CollectionActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection);
+
+        State.isneedtocrop=true;
+
         initData();
         initView();
         // 第一个参数是key， 第二个参数是若给定key对应的值不存在则默认的返回值；
@@ -58,7 +62,7 @@ public class CollectionActivity extends AppCompatActivity {
                 Intent intent = new Intent(CollectionActivity.this, ArtActivity.class);
                 //  第一个参数是key， 第二个参数是要传递的值
                 intent.putExtra("pictureFromApp",
-                        Collection_data_cartoon.get(position));
+                        Collection_data_cartoon.get(position).intValue());
                 intent.putExtra("styleCode",Pick_position);
                 CollectionActivity.this.startActivity(intent);
             }
@@ -73,7 +77,7 @@ public class CollectionActivity extends AppCompatActivity {
                 Intent intent = new Intent(CollectionActivity.this, ArtActivity.class);
                 //  第一个参数是key， 第二个参数是要传递的值
                 intent.putExtra("pictureFromApp",
-                        Collection_data_real.get(position));
+                        Collection_data_real.get(position).intValue());
                 intent.putExtra("styleCode",Pick_position);
                 CollectionActivity.this.startActivity(intent);
             }
@@ -86,7 +90,7 @@ public class CollectionActivity extends AppCompatActivity {
             Uri uri = data.getData();//"pictureFromLocal"
             Intent intent=new Intent(CollectionActivity.this,ArtActivity.class);
             intent.putExtra("pictureFromLocal",
-                    uri);
+                    uri.toString());
             intent.putExtra("styleCode",Pick_position);
             CollectionActivity.this.startActivity(intent);
 
