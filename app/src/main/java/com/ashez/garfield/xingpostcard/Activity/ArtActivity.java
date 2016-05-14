@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
@@ -38,6 +39,7 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
 
     ArtMenuAdapter artMenuAdapter;
     Handler mHandler;
+    ViewGroup.LayoutParams layoutParams;
 
     @Bind(R.id.pic_edit_view)
     MyImageView imageView;
@@ -61,8 +63,8 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
 
 
         initHandler();
-        initImageView();//初始化Imageview
         initTextViewAndEditView();//对文字框编辑框的初始化，位置微调
+        initImageView();//初始化Imageview
         iniMenu();//初始化底部
 
 
@@ -117,21 +119,31 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
 
     private void initTextViewAndEditView() {
         /**该方法用于微调文字框的位置*/
-
         Intent intent = getIntent();
 
         if (intent.getStringExtra("words") != null) {
             mwords.setText(intent.getStringExtra("words"));
         }
-        mwords.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/zfyx.ttf"));
+//        mwords.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/zfyx.ttf"));
 
         /**
          * 调整编辑界面图片的比例
          * */
 
 
+        layoutParams = artPicsarea.getLayoutParams();
+        ViewTreeObserver vto = artPicsarea.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                artPicsarea.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                layoutParams.width = (artPicsarea.getHeight() * 9 / 16)-200;
+                System.out.println("成功进入---"+layoutParams.width);
 
-//        artPicsarea.setLayoutParams();
+            }
+        });
+
+        artPicsarea.setLayoutParams(layoutParams);
 
 
     }
@@ -159,6 +171,10 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
             @Override
             public void onGlobalLayout() {
                 imageView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+
+//                ViewGroup.LayoutParams lp = imageView.getLayoutParams();
+//                lp.height = layoutParams.height / 2;
+//                imageView.setLayoutParams(lp);
                 imageView.setBorderWeight(imageView.getWidth(), imageView.getHeight());
                 Log.e("hhhhhhhh", imageView.getHeight() + "," + imageView.getWidth());
             }
