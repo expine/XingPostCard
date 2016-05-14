@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -36,13 +38,14 @@ import butterknife.OnClick;
  */
 public class ArtActivity extends AppCompatActivity implements View.OnFocusChangeListener {
 
-    ArtMenuAdapter artMenuAdapter;
-    Handler mHandler;
-    ViewGroup.LayoutParams layoutParams;
+    private ArtMenuAdapter artMenuAdapter;
+    private ViewGroup.LayoutParams layoutParams;
+    private Handler mHandler;
+    private int styleCode=0;
 
-    @Bind(R.id.pic_edit_view)
+//    @Bind(R.id.pic_edit_view)
     ImageView imageView;
-    @Bind(R.id.words_1)
+//    @Bind(R.id.words_1)
     TextView mwords;
 
     @Bind(R.id.art_menu)
@@ -60,10 +63,66 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
         setContentView(R.layout.activity_art);
         ButterKnife.bind(this);
 
+
+        initStyle(styleCode);
+
+
+
+
+
         initHandler();
-        initTextViewAndEditView();//对文字框编辑框的初始化，位置微调
-        initImageView();//初始化Imageview
+
         iniMenu();//初始化底部
+
+        test();
+
+
+    }
+
+    private void test() {
+
+        int w = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
+        int h = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
+        artPicsarea.measure(w, h);
+        int height =artPicsarea.getMeasuredHeight();
+        int width =artPicsarea.getMeasuredWidth();
+        System.out.println("h="+height+"   w="+width);
+    }
+
+    private void initStyle(int styleCode) {
+        switch (styleCode){
+            case 0:
+
+                LinearLayout ll = (LinearLayout) findViewById(R.id.art_picsarea);
+
+
+//                View view =View.inflate(ll.getContext(), R.layout.pattern_1, ll);
+                View view = LayoutInflater.from(this).inflate(R.layout.pattern_1, ll, true);
+//                ll.addView(view);
+
+                imageView = (ImageView) view.findViewById(R.id.pic_edit_view);
+                mwords = (TextView) view.findViewById(R.id.words_1);
+
+                initTextViewAndEditView();//对文字框编辑框的初始化，位置微调
+                initImageView();//初始化Imageview
+
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+
+
+
+
+        }
+
 
 
     }
@@ -121,6 +180,12 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
         if (intent.getStringExtra("words") != null) {
             mwords.setText(intent.getStringExtra("words"));
         }
+        mwords.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                A.goOtherActivityNoAnim(ArtActivity.this,EditCardActivity.class);
+            }
+        });
 //        mwords.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/zfyx.ttf"));
 
         /**
@@ -135,7 +200,6 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
             public void onGlobalLayout() {
                 artPicsarea.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 layoutParams.width = (artPicsarea.getHeight() *9/16 );
-                System.out.println("成功进入---" + layoutParams.width);
 
             }
         });
@@ -160,27 +224,15 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
 ////                lp.width = ViewGroup.MarginLayoutParams.MATCH_PARENT;
 ////                imageView.setLayoutParams(lp);
 //////                imageView.requestLayout();
-//                imageView.setBorderWeight(imageView.getWidth(), imageView.getHeight());
 //                Log.e("hhhhhhhh", imageView.getHeight() + "," + imageView.getWidth());
 //            }
 //        });
-//
+////
 //        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.img));
     }
 
 
-    @OnClick({R.id.pic_edit_view, R.id.words_1})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.pic_edit_view:
-                //
-                break;
-            case R.id.words_1:
-                /**点击文字后，编辑框的出现*/
-                A.goOtherActivityNoAnim(this, EditCardActivity.class);
-                break;
-        }
-    }
+
 
 
     @Override
