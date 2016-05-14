@@ -136,7 +136,7 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
             @Override
             public void onGlobalLayout() {
                 artPicsarea.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                layoutParams.width = (artPicsarea.getHeight() * 9 / 16 );
+                layoutParams.width = (artPicsarea.getHeight() *9/16 );
                 System.out.println("成功进入---" + layoutParams.width);
 
             }
@@ -174,13 +174,16 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
 //                ViewGroup.LayoutParams lp = imageView.getLayoutParams();
 //                lp.height = layoutParams.height / 2;
 //                imageView.setLayoutParams(lp);
+                ViewGroup.LayoutParams lp = imageView.getLayoutParams();
+                lp.width = ViewGroup.MarginLayoutParams.MATCH_PARENT;
+                imageView.setLayoutParams(lp);
+//                imageView.requestLayout();
                 imageView.setBorderWeight(imageView.getWidth(), imageView.getHeight());
                 Log.e("hhhhhhhh", imageView.getHeight() + "," + imageView.getWidth());
             }
         });
 
         imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.img));
-//        imageView.clip();
     }
 
 

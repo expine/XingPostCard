@@ -523,6 +523,7 @@ public class MyImageView extends ImageView implements View.OnTouchListener, View
         Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         draw(canvas);
+
         return Bitmap.createBitmap(bitmap, cutRect.left, cutRect.top, cutRect.width(), cutRect.height());
     }
 
