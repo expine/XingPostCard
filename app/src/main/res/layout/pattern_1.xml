@@ -7,31 +7,38 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <com.ashez.garfield.xingpostcard.Utils.MyImageView
+    <!--<com.ashez.garfield.xingpostcard.Utils.MyImageView-->
+    <!--android:id="@+id/pic_edit_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="2"-->
+    <!--android:focusable="true"-->
+    <!--android:focusableInTouchMode="true"-->
+    <!--MyImageView:ClipSquareIV_BorderColor="@android:color/transparent"-->
+    <!--MyImageView:ClipSquareIV_BorderDistance="0dp"-->
+    <!--MyImageView:ClipSquareIV_OutsideColor="#ffffffff" />-->
+
+    <ImageView
         android:id="@+id/pic_edit_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        MyImageView:ClipSquareIV_BorderColor="@android:color/transparent"
-        MyImageView:ClipSquareIV_BorderDistance="0dp"
-        MyImageView:ClipSquareIV_OutsideColor="#ffffffff" />
+        android:layout_weight="1"
+        android:background="@color/material_indigo_100"/>
+
     <RelativeLayout
 
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:focusable="true"
-        >
+        android:focusable="true">
+
         <TextView
             android:id="@+id/words_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="30dp"
             android:text="人生需要一场说走就走的旅行。"
-            android:textSize="14sp"
-            />
+            android:textSize="14sp" />
     </RelativeLayout>
 
 </LinearLayout>

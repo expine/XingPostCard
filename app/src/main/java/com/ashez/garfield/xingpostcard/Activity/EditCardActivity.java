@@ -40,6 +40,7 @@ public class EditCardActivity extends AppCompatActivity {
     public void onClick() {
         if(!editcardEt.getText().toString().isEmpty()){
             Intent intent = new Intent(this, ArtActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra("words", editcardEt.getText().toString());
             A.goOtherActivityFinishNoAnim(this,intent);
 

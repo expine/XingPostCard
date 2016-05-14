@@ -17,14 +17,13 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ashez.garfield.xingpostcard.Adapter.ArtMenuAdapter;
 import com.ashez.garfield.xingpostcard.R;
 import com.ashez.garfield.xingpostcard.Utils.A;
-import com.ashez.garfield.xingpostcard.Utils.MyImageView;
-import com.ashez.garfield.xingpostcard.Utils.Ruler;
 
 import java.io.ByteArrayOutputStream;
 
@@ -42,7 +41,7 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
     ViewGroup.LayoutParams layoutParams;
 
     @Bind(R.id.pic_edit_view)
-    MyImageView imageView;
+    ImageView imageView;
     @Bind(R.id.words_1)
     TextView mwords;
 
@@ -60,7 +59,6 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
 
         setContentView(R.layout.activity_art);
         ButterKnife.bind(this);
-
 
         initHandler();
         initTextViewAndEditView();//对文字框编辑框的初始化，位置微调
@@ -141,49 +139,33 @@ public class ArtActivity extends AppCompatActivity implements View.OnFocusChange
 
             }
         });
-
         artPicsarea.setLayoutParams(layoutParams);
-
-
     }
 
 
-//    private class MyGetFocusListener implements View.OnClickListener {
-//        @Override
-//        public void onClick(View view) {
-////    用于让BlankView获得焦点，并让键盘消失。
-//            ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(artWordsEt.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-////            InputMethodManager imm = (`InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-////            if (imm.isActive()) {
-////                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-////            }
-//            Log.e("eee", "-------------哦！你按到我了！");
-//
-////            view.requestFocus();
-//        }
-//    }
+
 
 
     private void initImageView() {
-        ViewTreeObserver vto2 = imageView.getViewTreeObserver();
-        vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                imageView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-
-//                ViewGroup.LayoutParams lp = imageView.getLayoutParams();
-//                lp.height = layoutParams.height / 2;
-//                imageView.setLayoutParams(lp);
-                ViewGroup.LayoutParams lp = imageView.getLayoutParams();
-                lp.width = ViewGroup.MarginLayoutParams.MATCH_PARENT;
-                imageView.setLayoutParams(lp);
-//                imageView.requestLayout();
-                imageView.setBorderWeight(imageView.getWidth(), imageView.getHeight());
-                Log.e("hhhhhhhh", imageView.getHeight() + "," + imageView.getWidth());
-            }
-        });
-
-        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.img));
+//        ViewTreeObserver vto2 = imageView.getViewTreeObserver();
+//        vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                imageView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//
+////                ViewGroup.LayoutParams lp = imageView.getLayoutParams();
+////                lp.height = layoutParams.height / 2;
+////                imageView.setLayoutParams(lp);
+////                ViewGroup.LayoutParams lp = imageView.getLayoutParams();
+////                lp.width = ViewGroup.MarginLayoutParams.MATCH_PARENT;
+////                imageView.setLayoutParams(lp);
+//////                imageView.requestLayout();
+//                imageView.setBorderWeight(imageView.getWidth(), imageView.getHeight());
+//                Log.e("hhhhhhhh", imageView.getHeight() + "," + imageView.getWidth());
+//            }
+//        });
+//
+//        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.img));
     }
 
 
