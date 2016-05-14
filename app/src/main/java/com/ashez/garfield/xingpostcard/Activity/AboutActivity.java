@@ -10,11 +10,12 @@ import com.ashez.garfield.xingpostcard.R;
  * Created by Garfield on 4/26/16.
  */
 
+//0000000
 public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
+        //65465132
     }
 }
